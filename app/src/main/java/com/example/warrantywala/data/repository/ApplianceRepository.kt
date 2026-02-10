@@ -28,6 +28,7 @@ class ApplianceRepository(
 
 
 
+
     suspend fun deleteAppliance(id: Int) {
 
         val appliance =

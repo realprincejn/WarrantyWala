@@ -30,7 +30,6 @@ import com.example.warrantywala.ui.add.AddApplianceScreen
 import com.example.warrantywala.ui.category.CategoryScreen
 import com.example.warrantywala.ui.detail.ApplianceDetailScreen
 import com.example.warrantywala.ui.imageviewer.ImageViewerScreen
-
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MainScreen() {
@@ -58,94 +57,126 @@ fun MainScreen() {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier.clickable {
-                            navController.navigate(Screen.Dashboard.route)
+                            navController.navigate(Screen.Dashboard.route) {
+                                popUpTo(Screen.Dashboard.route)
+                                launchSingleTop = true
+                            }
                         }
                     ) {
 
                         Icon(
-                            imageVector = Icons.Default.Home,
-                            contentDescription = "Dashboard",
-                            modifier = Modifier.size(24.dp),
+                            Icons.Default.Home,
+                            contentDescription = null,
                             tint = MaterialTheme.colorScheme.primary
                         )
 
-                        Text(
-                            text = "Dashboard",
-                            style = MaterialTheme.typography.labelSmall
-                        )
+                        Text("Dashboard")
                     }
 
-
-                    // CENTER ADD BUTTON
+                    // Add
                     FloatingActionButton(
                         onClick = {
                             navController.navigate(Screen.AddAppliance.route)
                         },
-                        modifier = Modifier.size(56.dp),
-                        shape = CircleShape,
-                        containerColor = MaterialTheme.colorScheme.primary
+                        shape = CircleShape
                     ) {
-                        Icon(
-                            Icons.Default.Add,
-                            contentDescription = "Add",
-                            modifier = Modifier.size(28.dp)
-                        )
-                    }
 
+                        Icon(Icons.Default.Add, null)
+
+                    }
 
                     // Categories
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier.clickable {
-                            navController.navigate(Screen.Categories.route)
+                            navController.navigate(Screen.Categories.route) {
+                                launchSingleTop = true
+                            }
                         }
                     ) {
 
                         Icon(
-                            imageVector = Icons.Default.Category,
-                            contentDescription = "Categories",
-                            modifier = Modifier.size(24.dp),
+                            Icons.Default.Category,
+                            contentDescription = null,
                             tint = MaterialTheme.colorScheme.primary
                         )
 
-                        Text(
-                            text = "Categories",
-                            style = MaterialTheme.typography.labelSmall
-                        )
+                        Text("Categories")
                     }
 
                 }
             }
         }
 
-    )
-    { padding ->
+    ) { padding ->
 
         NavHost(
+
             navController = navController,
+
             startDestination = Screen.Dashboard.route,
+
             modifier = Modifier.padding(padding)
+
         ) {
-            composable(
-                route = Screen.ImageViewer.route,
-                arguments = listOf(
-                    navArgument("uri") { type = NavType.StringType }
+
+            // REMOVE IMAGE VIEWER ROUTE COMPLETELY
+
+            composable(Screen.Dashboard.route) {
+
+                DashboardScreen(
+
+                    onItemClick = { id ->
+
+                        navController.navigate(
+                            Screen.Detail.createRoute(id)
+                        )
+
+                    },
+
+                    onAddClick = {
+
+                        navController.navigate(
+                            Screen.AddAppliance.route
+                        )
+
+                    },
+
+                    onImageClick = {
+                        // DO NOTHING
+                        // handled inside DashboardScreen overlay
+                    }
+
                 )
-            ) {
 
-                val encodedUri = it.arguments?.getString("uri") ?: return@composable
-
-                val decodedUri = Uri.decode(encodedUri)
-
-                ImageViewerScreen(decodedUri)
             }
 
+            composable(Screen.Categories.route) {
+
+                CategoryScreen()
+
+            }
+
+            composable(Screen.AddAppliance.route) {
+
+                AddApplianceScreen(
+                    onSaved = {
+                        navController.popBackStack()
+                    }
+                )
+
+            }
 
             composable(
+
                 route = Screen.EditAppliance.route,
+
                 arguments = listOf(
-                    navArgument("id") { type = NavType.IntType }
+                    navArgument("id") {
+                        type = NavType.IntType
+                    }
                 )
+
             ) {
 
                 val id = it.arguments?.getInt("id")
@@ -156,66 +187,47 @@ fun MainScreen() {
                         navController.popBackStack()
                     }
                 )
-            }
-
-            composable(Screen.Categories.route) {
-
-                CategoryScreen()
 
             }
-
-
-
-            composable(Screen.Dashboard.route) {
-
-                DashboardScreen(
-                    onItemClick = { id ->
-                        navController.navigate(Screen.Detail.createRoute(id))
-                    },
-                    onAddClick = {
-                        navController.navigate(Screen.AddAppliance.route)
-                    },
-                    onImageClick = { uri ->
-
-                        navController.navigate(
-                            Screen.ImageViewer.createRoute(uri)
-                        )}
-                )
-            }
-
-            composable(Screen.AddAppliance.route) {
-
-                AddApplianceScreen(
-                    onSaved = {
-                        navController.popBackStack()
-                    }
-                )
-            }
-
-
 
             composable(
-                route = Screen.Detail.route,
-                arguments = listOf(
-                    navArgument("id") { type = NavType.IntType }
-                )
-            ) { backStackEntry ->
 
-                val id = backStackEntry.arguments?.getInt("id") ?: return@composable
+                route = Screen.Detail.route,
+
+                arguments = listOf(
+                    navArgument("id") {
+                        type = NavType.IntType
+                    }
+                )
+
+            ) {
+
+                val id =
+                    it.arguments?.getInt("id")
+                        ?: return@composable
 
                 ApplianceDetailScreen(
+
                     applianceId = id,
+
                     onBack = {
                         navController.popBackStack()
                     },
-                    onEdit =  {
+
+                    onEdit = {
+
                         navController.navigate(
                             Screen.EditAppliance.createRoute(it)
                         )
+
                     }
+
                 )
+
             }
 
         }
+
     }
+
 }

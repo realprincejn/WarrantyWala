@@ -16,6 +16,7 @@ import android.net.Uri
 import android.app.DatePickerDialog
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import coil.compose.AsyncImage
@@ -88,9 +89,9 @@ fun AddApplianceScreen(
 
     Column(
         modifier = Modifier
-            .padding(16.dp)
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+            .fillMaxSize()
+            .padding(horizontal = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
 
         Text(
@@ -221,7 +222,8 @@ fun AddApplianceScreen(
 
         Button(
             onClick = { imagePickerLauncher.launch(arrayOf("image/*")) },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(14.dp)
         ) {
             Text("Upload Bill Image")
         }
@@ -234,7 +236,8 @@ fun AddApplianceScreen(
                 viewModel.saveAppliance(context)
                 onSaved()
             },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(14.dp)
         ) {
             Text("Save")
         }

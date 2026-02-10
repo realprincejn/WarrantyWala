@@ -30,6 +30,15 @@ class DashboardViewModel(
         observeAppliances()
     }
 
+    fun deleteAppliance(id: Int) {
+
+        viewModelScope.launch {
+
+            repository.deleteAppliance(id)
+
+        }
+    }
+
     fun onSearchChange(query: String) {
         _searchQuery.value = query
     }
