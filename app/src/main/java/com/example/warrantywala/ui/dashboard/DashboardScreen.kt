@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.SettingsBackupRestore
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -32,7 +33,8 @@ fun DashboardScreen(
 
     onAddClick: () -> Unit,
 
-    onImageClick: (String) -> Unit // keep this (don't remove)
+    onImageClick: (String) -> Unit,// keep this (don't remove)
+    onBackupClick: () -> Unit
 
 ) {
 
@@ -88,6 +90,25 @@ fun DashboardScreen(
                             )
                         }
                     }
+                },
+
+                actions = {
+
+                    IconButton(
+
+                        onClick = {
+                            onBackupClick()
+                        }
+
+                    ) {
+
+                        Icon(
+                            imageVector = Icons.Default.SettingsBackupRestore,
+                            contentDescription = "Backup"
+                        )
+
+                    }
+
                 }
             )
         }

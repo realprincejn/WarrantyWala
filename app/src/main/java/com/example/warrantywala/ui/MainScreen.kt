@@ -27,6 +27,7 @@ import androidx.navigation.navArgument
 import com.example.warrantywala.navigation.Screen
 import com.example.warrantywala.ui.dashboard.DashboardScreen
 import com.example.warrantywala.ui.add.AddApplianceScreen
+import com.example.warrantywala.ui.backup.BackupScreen
 import com.example.warrantywala.ui.category.CategoryScreen
 import com.example.warrantywala.ui.detail.ApplianceDetailScreen
 import com.example.warrantywala.ui.imageviewer.ImageViewerScreen
@@ -145,9 +146,17 @@ fun MainScreen() {
                     onImageClick = {
                         // DO NOTHING
                         // handled inside DashboardScreen overlay
+                    },
+                    onBackupClick = {
+                        navController.navigate(Screen.Backup.route)
                     }
-
                 )
+
+            }
+
+            composable(Screen.Backup.route) {
+
+                BackupScreen()
 
             }
 

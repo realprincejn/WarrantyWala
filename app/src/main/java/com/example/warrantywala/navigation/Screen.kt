@@ -29,6 +29,7 @@ sealed class Screen(val route: String) {
             return "imageViewer/$encoded"
         }
     }
+    object Backup : Screen("backup")
 
 
 
