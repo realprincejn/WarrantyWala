@@ -1,55 +1,126 @@
-# 🚀 WarrantyWala — Never Lose Track of Your Warranties Again
+# 🛡️ WarrantyWala — Smart Warranty Manager
 
-Stop raw-dogging repairs. Track every warranty, store bills, and get notified before expiry.
+Stop raw-dogging repairs. Track every warranty, store bills, backup to Drive, and get notified before expiry.
 
----
-
-## ✨ Features
-
-- 📦 Add and manage appliances
-- 🧾 Upload and store bill images securely
-- ⏰ Automatic warranty expiry notifications
-- 🗂 Custom and default categories
-- 📊 Dashboard with Active, Expiring, and Expired warranties
-- 🎨 Smooth splash animation and modern UI
-- ✏️ Edit and update appliance details anytime
+WarrantyWala is a modern Android app built with Jetpack Compose and MVVM that helps users manage appliance warranties, store bill images securely, and avoid missing warranty deadlines.
 
 ---
 
-## 🧠 Built With
+# ✨ Features
+
+## 📦 Appliance Management
+- Add appliances with warranty expiry date
+- Edit and update appliance details anytime
+- Swipe to delete with confirmation dialog
+- Clean dashboard with warranty status
+
+## 🧾 Bill Image Storage
+- Upload bill images securely
+- Stored in internal storage
+- Full-screen image viewer
+- Persistent even after app restart
+
+## ⏰ Smart Warranty Notifications
+- Exact alarm scheduling using AlarmManager
+- Dynamic expiry warning messages
+- Works even if app is closed
+- Reliable and battery-optimized
+
+## 🗂 Category System
+- Default and custom categories
+- Filter appliances by category
+- Fast search functionality
+
+## ☁️ Google Drive Backup & Restore
+- Manual backup to Google Drive
+- Restore after reinstall
+- Backup includes:
+  - Room database
+  - All bill images
+- Optional and user-controlled
+
+## 📊 Dashboard Overview
+- View Active warranties
+- View Expiring warranties
+- View Expired warranties
+- Smooth and modern UI
+
+## 🎨 Modern UI / UX
+- Animated splash screen
+- Material 3 design
+- Smooth Compose animations
+- Swipe gestures support
+- Floating action button navigation
+
+---
+
+# 📱 Screens
+
+- Splash Screen
+- Dashboard Screen
+- Add Appliance Screen
+- Edit Appliance Screen
+- Appliance Detail Screen
+- Category Screen
+- Image Viewer Screen
+- Backup & Restore Screen
+
+---
+
+# 🧠 Architecture
+
+This app follows modern Android development best practices:
+
+- MVVM Architecture
+- Repository Pattern
+- StateFlow for state management
+- Single Source of Truth
+- Offline-first design
+
+---
+
+# 🛠 Built With
 
 - Kotlin
 - Jetpack Compose
-- MVVM Architecture
 - Room Database
-- AlarmManager & BroadcastReceiver
-- Notification Channels
-- Coil Image Loading
-- Coroutines & StateFlow
+- MVVM Architecture
+- AlarmManager
+- BroadcastReceiver
+- Google Drive Storage Access Framework
+- Coil (Image Loading)
+- Coroutines
+- StateFlow
+- Material 3
 
 ---
 
-## ⚡ Highlights
+# ⚡ Technical Highlights
 
-- Exact alarm scheduling for precise warranty reminders  
-- Persistent bill image storage using internal storage  
-- Clean, scalable architecture  
-- Modern Android development with Compose  
-
----
-
-## 📱 Screens
-
-- Splash Screen  
-- Dashboard  
-- Add Appliance  
-- Category Management  
+- Exact alarm scheduling with `setExactAndAllowWhileIdle`
+- Secure Google Drive backup using Storage Access Framework
+- Persistent Room database storage
+- Efficient internal image storage
+- Swipe-to-delete with confirmation protection
+- Reactive UI using StateFlow
+- Fully offline-capable app
 
 ---
 
-## 🎯 Purpose
+# 🔐 Data Safety
 
-WarrantyWala solves a real-world problem — helping users avoid unnecessary repair costs by never missing warranty deadlines.
+- No forced login
+- Works fully offline
+- Backup optional and user-controlled
+- No data collected
+
+---
+
+# 🎯 Purpose
+
+WarrantyWala solves a real-world problem: people forget warranty deadlines and lose money on repairs.
+
+This app ensures users never miss warranty expiry again.
 
 ---
 
